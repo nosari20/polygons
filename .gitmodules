@@ -1,0 +1,3 @@
+[submodule "kmeans"]
+	path = lib/kmeans
+	url = https://nosari20@github.com/nosari20/kmeans.git

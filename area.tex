@@ -1,0 +1,124 @@
+\documentclass{article}
+\usepackage {algorithm2e}
+\SetKwComment{Comment}{$\triangleright$\ }{}
+\begin{document}
+\begin{algorithm}[H]
+	\KwData{
+		\begin{itemize}
+			\itemsep-0.5em 
+			\item Courbe $\textrm{C}_\textrm{0}$
+			\item Courbe $\textrm{C}_\textrm{1}$
+		\end{itemize}
+	}
+	\KwResult{Aire entre les deux courbes} 
+	
+	\smallbreak
+	
+	\Comment{Uniformisation des x}
+	\smallbreak
+	
+	$ \textrm{iC}_\textrm{0} \leftarrow 1 $\\
+	$ \textrm{iC}_\textrm{1} \leftarrow 1 $\\
+	
+	
+	
+	$\textrm{Co}_\textrm{0} \leftarrow \{\} $\\
+	$\textrm{Co}_\textrm{1} \leftarrow \{\} $\\
+	
+	
+	
+	$\textrm{Co}_\textrm{0} \leftarrow \textrm{Co}_\textrm{0} \cup \textrm{C}_\textrm{0}[\textrm{iC}_\textrm{0}]$\\
+	$\textrm{Co}_\textrm{1} \leftarrow \textrm{Co}_\textrm{1} \cup \textrm{C}_\textrm{1}[\textrm{iC}_\textrm{1}]$\\
+
+	
+	
+	$\textrm{P}_\textrm{0} \leftarrow \textrm{C}_\textrm{0}[\textrm{iC}_\textrm{0}]$\\
+	$\textrm{P}_\textrm{1} \leftarrow \textrm{C}_\textrm{1}[\textrm{iC}_\textrm{1}]$\\
+	
+	\smallbreak
+	
+	\While{($\textrm{iC}_\textrm{0}<size(\textrm{C}_\textrm{0})$ or $\textrm{iC}_\textrm{1}<size(\textrm{C}_\textrm{1})$) and (	$\textrm{P}_\textrm{0}.x < 1$ or $\textrm{P}_\textrm{1}.x < 1$)	}
+	{
+		
+		
+		\uIf{$\textrm{iC}_\textrm{0}>=size(\textrm{C}_\textrm{0})$}{ 
+			$\textrm{P}_\textrm{0} \leftarrow \textrm{C}_\textrm{0}[size(\textrm{C}_\textrm{0})-1]$\\
+		}
+		\Else{
+			$\textrm{P}_\textrm{0} \leftarrow \textrm{C}_\textrm{0}[\textrm{iC}_\textrm{0}]$\\
+		}
+		
+		
+	
+		\uIf{$\textrm{iC}_\textrm{1}>=size(\textrm{C}_\textrm{1})$}{ 
+			$\textrm{P}_\textrm{1} \leftarrow \textrm{C}_\textrm{1}[size(\textrm{C}_\textrm{1})-1]$\\
+		}
+		\Else{
+			$\textrm{P}_\textrm{1} \leftarrow \textrm{C}_\textrm{1}[\textrm{iC}_\textrm{1}]$\\
+		}
+	
+		\smallbreak
+		
+		\uIf{$\textrm{P}_\textrm{0}.x < \textrm{P}_\textrm{1}.x$}{ 
+			\While{$\textrm{P}_\textrm{0}.x <= \textrm{P}_\textrm{1}.x$ and $\textrm{iC}_\textrm{0}<size(\textrm{C}_\textrm{0})-1$}
+			{
+				$\textrm{Co}_\textrm{1} \leftarrow \textrm{Co}_\textrm{1} \cup <\textrm{P}_\textrm{0}.x, \textrm{P}_\textrm{1}.y>$\\
+				$\textrm{Co}_\textrm{0} \leftarrow \textrm{Co}_\textrm{0} \cup \textrm{P}_\textrm{0}$\\
+				$ \textrm{iC}_\textrm{0} \leftarrow \textrm{iC}_\textrm{0} + 1 $\\
+				$\textrm{P}_\textrm{0} \leftarrow \textrm{C}_\textrm{0}[\textrm{iC}_\textrm{0}]$\\
+				
+				
+			}
+		}
+	
+		\smallbreak
+		
+		\uIf{$\textrm{P}_\textrm{0}.x > \textrm{P}_\textrm{1}.x$}{ 
+			\While{$\textrm{P}_\textrm{0}.x >= \textrm{P}_\textrm{1}.x$ and $\textrm{iC}_\textrm{1}<size(\textrm{C}_\textrm{1})-1$}
+			{
+				$\textrm{Co}_\textrm{0} \leftarrow \textrm{Co}_\textrm{0} \cup <\textrm{P}_\textrm{1}.x, \textrm{P}_\textrm{0}.y>$\\
+				$\textrm{Co}_\textrm{1} \leftarrow \textrm{Co}_\textrm{1} \cup \textrm{P}_\textrm{1}$\\
+				$ \textrm{iC}_\textrm{1} \leftarrow \textrm{iC}_\textrm{1} + 1 $\\
+				$\textrm{P}_\textrm{1} \leftarrow \textrm{C}_\textrm{1}[\textrm{iC}_\textrm{1}]$\\
+				
+				
+			}
+		}
+	
+		\smallbreak
+		
+		\uIf{$\textrm{P}_\textrm{0}.x == \textrm{P}_\textrm{1}.x$}{ 
+			$\textrm{Co}_\textrm{0} \leftarrow \textrm{Co}_\textrm{0} \cup \textrm{P}_\textrm{0}$\\
+			$\textrm{Co}_\textrm{1} \leftarrow \textrm{Co}_\textrm{1} \cup \textrm{P}_\textrm{1}$\\
+			$ \textrm{iC}_\textrm{0} \leftarrow \textrm{iC}_\textrm{0} + 1 $\\
+			$ \textrm{iC}_\textrm{1} \leftarrow \textrm{iC}_\textrm{1} + 1 $\\			
+		}
+				
+	}
+	
+	\smallbreak
+	
+	$\textrm{Co}_\textrm{0} \leftarrow \textrm{Co}_\textrm{0} \cup \textrm{C}_\textrm{0}[size(\textrm{C}_\textrm{0})-1]$\\
+	$\textrm{Co}_\textrm{1} \leftarrow \textrm{Co}_\textrm{1} \cup \textrm{C}_\textrm{1}[size(\textrm{C}_\textrm{1})-1]$\\
+	
+	
+	\smallbreak
+	
+	\Comment{Calcul de l'aire}
+	
+	
+	
+	$a \leftarrow 0$\\
+	\For{$i \leftarrow 1$, $i < size(\textrm{C}_\textrm{0})$, $i{+}{+}$}
+	{
+		$a \leftarrow a + dist(\textrm{Co}_\textrm{0}[i].x, \textrm{Co}_\textrm{0}[i-1].x) \times dist(\textrm{Co}_\textrm{0}[i].y, \textrm{Co}_\textrm{1}[i].y)$\\
+	}
+
+	return $a$\\
+	
+	\caption{Calcul d'aire}
+\end{algorithm}
+    
+    
+
+\end{document}

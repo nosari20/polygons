@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage {algorithm2e}
+\SetKwComment{Comment}{$\triangleright$\ }{}
+\begin{document}
+\begin{algorithm}[H]
+	\KwData{Polygon $P$ \{$<\textrm{$Px$}_\textrm{$0$}, \textrm{$Py$}_\textrm{$0$}>$ ... $<\textrm{$Px$}_\textrm{$n-1$}, \textrm{$Py$}_\textrm{$n$}>$\}}
+	\KwResult{Courbe $C$ \{$<\textrm{$Cx$}_\textrm{$0$}, \textrm{$Cy$}_\textrm{$0$}>$ ... $<\textrm{$Cx$}_\textrm{$2n-1$}, \textrm{$Cy$}_\textrm{$2n$}>$\}}
+	\smallbreak
+	
+	$\textrm{C}_\textrm{0} \leftarrow <0,\0>$\\
+		
+	\smallbreak
+	\For{$i$ in \{$1$ ... $n-1$\}}{
+		\smallbreak
+		$\textrm{$C$}_\textrm{$2i-1$} \leftarrow <\textrm{$Cx$}_\textrm{$i-1$}+dist(\textrm{$P$}_\textrm{$i$},\textrm{$P$}_\textrm{$i-1$}),\textrm{$Cy$}_\textrm{$i-1$}>$\\
+		\smallbreak
+		$\textrm{$C$}_\textrm{$2i$} \leftarrow <\textrm{$Cx$}_\textrm{$i-1$},\ \textrm{$Cy$}_\textrm{$i-1$}+angle(\textrm{$P$}_\textrm{$i$})>$\\
+	
+			
+	}
+
+	$\textrm{$C$}_\textrm{$2n-1$} \leftarrow <\textrm{$Cx$}_\textrm{$2n-2$}+dist(\textrm{$P$}_\textrm{$n-1$},\textrm{$P$}_\textrm{$0$}),\ \textrm{$Cy$}_\textrm{$2n-2$}>$\\
+
+	\smallbreak
+	return $C$\;
+
+	
+	\caption{Turning function}
+\end{algorithm}
+    
+    
+
+\end{document}

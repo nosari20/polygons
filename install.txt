@@ -1,0 +1,14 @@
+sudo apt-get install qt-sdk qt5-default doxygen libboost-all-dev texlive zlib1g-dev libgmp3-dev
+rm ./tmp/GraphicsMagick-*
+wget -O /tmp/GraphicsMagick-LATEST.tar.gz "ftp://ftp.graphicsmagick.org/pub/GraphicsMagick/GraphicsMagick-LATEST.tar.gz"
+tar xvf /tmp/GraphicsMagick-LATEST.tar.gz -C /tmp
+/tmp/GraphicsMagick-*/configure
+
+rm ~/DGtal*.tar.gz
+wget -O ~/DGtal-0.9.3-Source.tar.gz "http://dgtal.org/releases/DGtal-0.9.3-Source.tar.gz"
+tar xvf ~/DGtal-0.9.3-Source.tar.gz -C ~/
+rm ~/DGtal*.tar.gz
+cd ~/DGtal-0.9.3/
+cmake .
+make
+sudo make install

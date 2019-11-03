@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage {algorithm2e}
+\SetKwComment{Comment}{$\triangleright$\ }{}
+\begin{document}
+\begin{algorithm}[H]
+	\KwData{
+		\begin{itemize}
+			\itemsep-0.5em 
+			\item Point $\textrm{P}_\textrm{0}$ $<\textrm{$Px$}_\textrm{$0$}, \textrm{$Py$}_\textrm{$0$}>$
+			\item Point $\textrm{P}_\textrm{1}$ $<\textrm{$Px$}_\textrm{$1$}, \textrm{$Py$}_\textrm{$1$}>$
+			\item Point $\textrm{P}_\textrm{2}$ $<\textrm{$Px$}_\textrm{$2$}, \textrm{$Py$}_\textrm{$2$}>$
+		\end{itemize}
+	}
+	\KwResult{angle orient\'{e} en radians } \smallbreak
+	
+	\bigbreak
+	
+	\Comment{Calcul de l'angle (non orient\'{e})}
+	$a \leftarrow dist(\textrm{P}_\textrm{1},\textrm{P}_\textrm{2}) $\\
+	$b \leftarrow dist(\textrm{P}_\textrm{0},\textrm{P}_\textrm{1}) $\\
+	$c \leftarrow dist(\textrm{P}_\textrm{0},\textrm{P}_\textrm{2}) $\\
+	
+	\If{$a==0$ or $b==0$ or $c==0$}{
+		return $0$\
+	}
+	\bigbreak
+	
+	$cos \leftarrow \frac{a^2 + b^2 - c^2}{2ab} $\
+	\smallbreak
+	\uIf{$cos<0$}{
+		$angle \leftarrow \pi - acos(cos)$\\
+	}
+	\Else{
+		$angle \leftarrow acos(cos)$\\
+	}
+
+	\bigbreak
+	
+	\Comment{Calcul de l'orientation )}
+	
+	$d  \leftarrow (\textrm{Px}_\textrm{1}) - \textrm{Px}_\textrm{0})
+					(\textrm{Py}_\textrm{2}) - \textrm{Py}_\textrm{0})
+					-	
+					(\textrm{Py}_\textrm{1}) - \textrm{Py}_\textrm{0})
+					(\textrm{Px}_\textrm{2}) - \textrm{Px}_\textrm{0})$\
+	\smallbreak				
+			
+			
+	\uIf{$d<0$}{ 
+		\Comment{ $\textrm{P}_\textrm{2}$ \`{a} gauche de la droite ($\textrm{P}\textrm{0},\textrm{P}_\textrm{1}$)}
+		$o \leftarrow 1$\\
+	}
+	\uElseIf{$d>$0}{
+		\Comment{ $\textrm{P}_\textrm{2}$ \`{a} droite de la droite ($\textrm{P}\textrm{0},\textrm{P}_\textrm{1}$)}
+		$o \leftarrow -1$\\	
+	}
+	\Else{
+		\Comment{ $\textrm{P}_\textrm{2}$ sur la droite ($\textrm{P}\textrm{0},\textrm{P}_\textrm{1}$)}
+		$o \leftarrow 0$\\	
+	}
+
+	return $(\pi-angle) \times o$\\
+
+	\bigbreak
+	
+	\caption{Calcul d'angle}
+\end{algorithm}
+    
+    
+
+\end{document}

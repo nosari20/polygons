@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage {algorithm2e}
+\SetKwComment{Comment}{$\triangleright$\ }{}
+\begin{document}
+\begin{algorithm}[H]
+	\KwData{
+		\begin{itemize}
+			\itemsep-0.5em 
+			\item Polygon Pt
+			\item taille du polygon N
+			\item sens s (1 pour sens radial  ou -1 pour l'inverse)
+		\end{itemize}
+	}
+	\KwResult{Courbe C (liste de paires \textless r\'{e}el, r\'{e}el \textgreater) }
+	\bigbreak
+	$C \leftarrow \{\} $\\
+	$x \leftarrow 0 $\\
+	$y \leftarrow 0 $\\
+	$p \leftarrow perimetre(P) $\\
+	
+	\bigbreak
+
+	\bigbreak
+	\Comment{Point 0}	
+	$C \leftarrow C \cup \{<x,y>\} $\\
+	
+	\bigbreak
+	\Comment{Points 1 \`{a} N-1}
+	\For{$i \leftarrow 1$, $i < N-1$, $i{+}{+}$}{
+		$x \leftarrow x + dist(\textrm{P}_\textrm{i-1},\textrm{P}_\textrm{i})/p $\\
+		$C \leftarrow C \cup \{<x,y>\} $\\
+		\smallbreak
+		$y \leftarrow y + s\timesangle(\textrm{P}_\textrm{i-1},\textrm{P}_\textrm{i},\textrm{P}_\textrm{i+1}) $\\
+		$C \leftarrow C \cup \{<x,y>\} $\\
+		
+	}
+	$x \leftarrow dist(\textrm{P}_\textrm{N-2},\textrm{P}_\textrm{N-1}) $\\
+	$C \leftarrow C \cup \{<x,y>\} $\\
+	
+	\bigbreak
+	\Comment{Point N-1}
+	$y \leftarrow y + s\timesangle(\textrm{P}_\textrm{N-2},\textrm{P}_\textrm{N-1},\textrm{P}_\textrm{0}) $\\
+	$C \leftarrow C \cup \{<x,y>\} $\\
+	\smallbreak
+	$x \leftarrow x + dist(\textrm{P}_\textrm{N-1},\textrm{P}_\textrm{0})/p $\
+	$C \leftarrow C \cup \{<1,y>\} $\\
+	
+	\bigbreak
+	$return\; C$\\
+	\bigbreak
+
+	
+	\caption{Turning function}
+\end{algorithm}
+    
+    
+
+\end{document}
